@@ -88,9 +88,25 @@ compute_output_size_2d(input_matrix, kernel_matrix)
 # Your code here:
 # -----------------------------------------------
 def convolute_2d(input_matrix, kernel_matrix):
-    # Tip: same tips as above, but you might need a nested loop here in order to
-    # define which parts of the input matrix need to be multiplied with the kernel matrix.
-    pass
+    # Dimensions
+    out_h, out_w = compute_output_size_2d(input_matrix, kernel_matrix)
+    kH, kW = kernel_matrix.shape
+    conv = np.empty(shape = (out_h, out_w))
 
+    # Convolution (nested loop)
+    for i in range(out_h):
+        for j in range(out_w):
+            window = input_matrix[i:i+kH, j:j+kW] # window of input to apply kernel
+            conv[i,j] = np.sum(kernel_matrix * window)
+    
+    return conv
 
 # -----------------------------------------------
+# Test case
+input_matrix = np.matrix([[1,2,3,4,5],
+                          [6,7,8,9,10],
+                          [11,12,13,14,15],
+                          [16,17,18,19,20],
+                          [21,22,23,24,25]])
+kernel_matrix = np.matrix([[-1,0,1],[-1,0,1],[-1,0,1]])
+convolute_2d(input_matrix, kernel_matrix)
