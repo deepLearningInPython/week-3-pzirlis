@@ -39,7 +39,7 @@ def convolve_1d(input_array, kernel_array):
     # Then fill the cells in the array with a loop.
     size = 
     conv = np.array()
-    pass
+    pass 
 
 # -----------------------------------------------
 # Another tip: write test cases like this, so you can easily test your function.
