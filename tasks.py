@@ -16,7 +16,7 @@ import numpy as np
 # -----------------------------------------------
 
 def compute_output_size_1d(input_array, kernel_array):
-    return (len(input_array) - len(kernel_length) + 1)
+    return (len(input_array) - len(kernel_array) + 1)
 
 
 # -----------------------------------------------
@@ -35,11 +35,15 @@ print(compute_output_size_1d(input_array, kernel_array))
 # -----------------------------------------------
 
 def convolve_1d(input_array, kernel_array):
-    # Tip: start by initializing an empty output array (you can use your function above to calculate the correct size).
+    # Start by initializing an empty output array
+    size = (len(input_array) - len(kernel_array) + 1)
+    conv = np.empty(size)
+
     # Then fill the cells in the array with a loop.
-    size = 
-    conv = np.array()
-    pass 
+    for i in range(size):
+        conv[i] = (input_array[i:i+3] @ kernel_array)
+
+    return conv
 
 # -----------------------------------------------
 # Another tip: write test cases like this, so you can easily test your function.
@@ -58,11 +62,23 @@ print(convolve_1d(input_array, kernel_array))
 # -----------------------------------------------
 
 def compute_output_size_2d(input_matrix, kernel_matrix):
-    pass
-
+    # Get heights and widths
+    input_height, input_width   = np.shape(input_matrix)
+    kernel_height, kernel_width = np.shape(kernel_matrix)
+    
+    # Dimension of convolution
+    dimensions = (input_height - kernel_height + 1, input_width - kernel_width + 1)
+    return dimensions
 
 # -----------------------------------------------
-
+# Test case
+input_matrix = np.matrix([[1,2,3,4,5],
+                          [6,7,8,9,10],
+                          [11,12,13,14,15],
+                          [16,17,18,19,20],
+                          [21,22,23,24,25]])
+kernel_matrix = np.matrix([[-1,0,1],[-1,0,1],[-1,0,1]])
+compute_output_size_2d(input_matrix, kernel_matrix)
 
 # Task 4: 2D Convolution
 # Instructions:
